@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Home - LATITAKA BORNEO</title>
+</head>
+<body>    
+
+    <!-- Include navbar -->
+    <header>
+        <div class="wrapper">
+            <!-- Include navbar.ejs here -->
+            <%- include('../includes/navbar.ejs') %>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <section id="Hampers">
+            <h2>Hampers</h2>
+            <p>Pemesanan Hampers Bisa sesuai request dari para latiers yaa.</p>
+            <!-- Content specific to Hampers page -->
+        </section>
+    </div>
+
+    <!-- Include footer -->
+    <%- include(__dirname + '/includes/footer') %>
+</body>
+</html>

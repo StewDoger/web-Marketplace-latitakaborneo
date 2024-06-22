@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border-bottom: 2px solid #007bff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+nav .Logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+nav .Menu ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav .Menu ul li {
+    margin-left: 20px;
+}
+
+nav .Menu ul li a {
+    color: #333333;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav .Menu ul li a:hover {
+    color: #007bff;
+}
+
+section {
+    margin: 50px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.kolom .deskripsi {
+    font-size: 18px;
+    color: #ad2727;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 36px;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+a.tbl-biru,
+a.tbl-pink {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+a.tbl-biru {
+    background-color: #007bff;
+}
+
+a.tbl-pink {
+    background-color: #e83e8c;
+}
+
+a.tbl-biru:hover {
+    background-color: #0056b3;
+}
+
+a.tbl-pink:hover {
+    background-color: #bd2a70;
+}
+
+#Produk h2 {
+    font-size: 36px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+#Produk p {
+    font-size: 16px;
+    color: #020202;
+    margin-bottom: 20px;
+}
+
+.gambar-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dua kolom dengan lebar yang sama */
+    gap: 20px; /* Jarak antara gambar */
+}
+
+.gambar-container img {
+    width: 100%; /* Gambar mengisi lebar parent */
+    height: auto; /* Menjaga aspek rasio gambar */
+}
+
+#Produk {
+    margin-bottom: 120px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.wrapper #Home img {
+    max-width: 40%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 25px;
+    left: 0;
+    width: 100%;
+    background-color: #cde9fc;
+    color: #000000;
+    padding: 20px;
+    border-top: 2px solid #47515b;
+    display: flex;
+    justify-content: flex-start;
+    z-index: 1;
+}
+
+.footer-section {
+    margin-right: 20px;
+}
+
+.footer-section:last-child {
+    margin-right: 0;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    color: #666666;
+}
+
+.footer-section img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.footer-section a:hover {
+    text-decoration: underline; /* Efek hover saat tautan diarahkan */
+}
+
+.wrapper #Order img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.wrapper #Konsultasi img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.wrapper #Konsultasi img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+#Konsultasi {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#Konsultasi h2 {
+    font-size: 36px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+#Konsultasi p {
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.instagram-link {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instagram-link a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.instagram-link img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.instagram-link span {
+    font-weight: bold;
+    font-size: 18px; /* Sesuaikan ukuran font dengan kebutuhan */
+}
+
+#copyright {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #43a1ff;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1; 
+}
