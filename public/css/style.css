@@ -6,10 +6,9 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #c849b5;
+    background-color: #dfa4d6;
     margin: 0;
 }
-
 .wrapper {
     width: 90%;
     max-width: 1100px;
@@ -20,8 +19,8 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #ffffff;
-    border-bottom: 2px solid #007bff;
+    background-color: #e882c1;
+    border-bottom: 2px solid hsl(315, 69%, 12%);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -35,7 +34,7 @@ nav {
 nav .Logo a {
     font-size: 24px;
     font-weight: bold;
-    color: #007bff;
+    color: #2c0229;
     text-decoration: none;
 }
 
@@ -56,7 +55,7 @@ nav .Menu ul li a {
 }
 
 nav .Menu ul li a:hover {
-    color: #007bff;
+    color: #cdd5de;
 }
 
 section {
@@ -67,7 +66,7 @@ section {
 
 .kolom .deskripsi {
     font-size: 18px;
-    color: #ad2727;
+    color: #3f193b;
     margin-bottom: 10px;
 }
 
@@ -83,7 +82,7 @@ a.tbl-pink {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 20px;
-    color: #ffffff;
+    color: #d1c1cb;
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
@@ -91,7 +90,7 @@ a.tbl-pink {
 }
 
 a.tbl-biru {
-    background-color: #007bff;
+    background-color: #5a0664;
 }
 
 a.tbl-pink {
@@ -99,7 +98,7 @@ a.tbl-pink {
 }
 
 a.tbl-biru:hover {
-    background-color: #0056b3;
+    background-color: #421849;
 }
 
 a.tbl-pink:hover {
@@ -147,10 +146,10 @@ a.tbl-pink:hover {
     bottom: 25px;
     left: 0;
     width: 100%;
-    background-color: #cde9fc;
-    color: #000000;
+    background-color: #da6cc2;
+    color: #724646;
     padding: 20px;
-    border-top: 2px solid #47515b;
+    border-top: 2px solid #0e2134;
     display: flex;
     justify-content: flex-start;
     z-index: 1;
@@ -171,7 +170,7 @@ a.tbl-pink:hover {
 }
 
 .footer-section p {
-    color: #666666;
+    color: #3a0835;
 }
 
 .footer-section img {
@@ -209,7 +208,7 @@ a.tbl-pink:hover {
 
 #Konsultasi h2 {
     font-size: 36px;
-    color: #333333;
+    color: #340936;
     margin-bottom: 20px;
 }
 
@@ -231,7 +230,7 @@ a.tbl-pink:hover {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #333;
+    color: #0e0e0c;
 }
 
 .instagram-link img {
@@ -250,8 +249,8 @@ a.tbl-pink:hover {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #43a1ff;
-    color: #ffffff;
+    background-color: #691d64;
+    color: #e9ef7f;
     text-align: center;
     padding: 10px 0;
     z-index: 1; 
