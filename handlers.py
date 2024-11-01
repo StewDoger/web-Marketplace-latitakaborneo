@@ -32,31 +32,40 @@ async def handle_kembali_ke_menu(update: Update, context: ContextTypes.DEFAULT_T
 
 # Fungsi untuk menampilkan daftar produk dari MongoDB
 async def handle_lihat_produk(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # Pastikan hanya `callback_query` yang diproses
+    if not update.callback_query:
+        await update.message.reply_text("Maaf, ada kesalahan dalam permintaan Anda.")
+        return
+
     query = update.callback_query
     await query.answer()
-
     produk_keyboard = []
+
     try:
-        # Mengambil semua produk dari koleksi
+        # Ambil daftar produk dari database
         for produk in products_collection.find():
-            # Pastikan produk memiliki kunci yang diperlukan
             if 'name' in produk and 'description' in produk:
                 produk_keyboard.append([InlineKeyboardButton(produk['name'], callback_data=f"produk_{produk['_id']}")])
 
-        # Menambahkan opsi kembali ke menu utama
+        # Tambahkan tombol kembali ke menu utama
         produk_keyboard.append([InlineKeyboardButton("Kembali ke Menu Utama", callback_data='menu_utama')])
         reply_markup = InlineKeyboardMarkup(produk_keyboard)
 
+        # Tampilkan daftar produk atau pesan jika tidak ada produk
         if produk_keyboard:
             await query.edit_message_text(text="Pilih produk untuk melihat detailnya:", reply_markup=reply_markup)
         else:
             await query.edit_message_text(text="Tidak ada produk yang tersedia.")
     except Exception as e:
-        await query.edit_message_text(text="Terjadi kesalahan saat mengambil daftar produk.")
+        await query.edit_message_text(text="Terjadi kesalahan saat mengambil daftar produk. Silakan coba lagi nanti.")
         print(f"Error: {e}")
 
 # Fungsi untuk menampilkan detail produk yang dipilih
 async def handle_produk_detail(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not update.callback_query:
+        await update.message.reply_text("Maaf, ada kesalahan dalam permintaan Anda.")
+        return
+
     query = update.callback_query
     await query.answer()
     produk_id = query.data.split('_')[1]
@@ -64,7 +73,6 @@ async def handle_produk_detail(update: Update, context: ContextTypes.DEFAULT_TYP
     try:
         produk = products_collection.find_one({"_id": ObjectId(produk_id)})
         if produk:
-            # Memastikan bahwa deskripsi adalah string
             detail_produk = f"{produk['name']}\n\nDeskripsi: {produk['description']}\nHarga: Rp {produk['price']:,}\nStok: {produk['stock']} buah"
             keyboard = [
                 [InlineKeyboardButton("Cara Pembelian", callback_data='cara_pembelian')],
@@ -75,24 +83,32 @@ async def handle_produk_detail(update: Update, context: ContextTypes.DEFAULT_TYP
         else:
             await query.edit_message_text(text="Detail produk tidak ditemukan.")
     except Exception as e:
-        await query.edit_message_text(text="Terjadi kesalahan saat mengambil detail produk.")
+        await query.edit_message_text(text="Terjadi kesalahan saat mengambil detail produk. Silakan coba lagi nanti.")
         print(f"Error: {e}")
 
 # Fungsi untuk menampilkan cara pembayaran
 async def handle_cara_bayar(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
     keyboard = [[InlineKeyboardButton("Kembali ke Menu Utama", callback_data='menu_utama')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await query.edit_message_text(text=cara_bayar, reply_markup=reply_markup)
+
+    if update.callback_query:
+        query = update.callback_query
+        await query.answer()
+        await query.edit_message_text(text=cara_bayar, reply_markup=reply_markup)
+    elif update.message:
+        await update.message.reply_text(text=cara_bayar, reply_markup=reply_markup)
 
 # Fungsi untuk menampilkan cara pembelian
 async def handle_cara_pembelian(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
     keyboard = [[InlineKeyboardButton("Kembali ke Menu Utama", callback_data='menu_utama')]]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await query.edit_message_text(text=cara_pembelian, reply_markup=reply_markup)
+
+    if update.callback_query:
+        query = update.callback_query
+        await query.answer()
+        await query.edit_message_text(text=cara_pembelian, reply_markup=reply_markup)
+    elif update.message:
+        await update.message.reply_text(text=cara_pembelian, reply_markup=reply_markup)
 
 # Memastikan callback_query diproses dengan benar
 async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
