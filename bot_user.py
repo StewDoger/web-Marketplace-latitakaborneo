@@ -1,7 +1,8 @@
 import re
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, CallbackQueryHandler
+from handlers import handle_callback_query
+from keyword_message import handle_message
 from handlers import (
-    handle_message,
     handle_lihat_produk,
     handle_produk_detail,
     handle_cara_bayar,
@@ -29,6 +30,9 @@ if __name__ == '__main__':
 
     # Handler untuk kembali ke menu utama
     application.add_handler(CallbackQueryHandler(handle_kembali_ke_menu, pattern='^menu_utama$'))
+
+    # Tambahkan handler untuk callback_query
+    application.add_handler(CallbackQueryHandler(handle_callback_query))
 
     # Menjalankan bot
     application.run_polling()
