@@ -120,14 +120,12 @@ async def handle_message(update, context):
     if any(term in user_message for term in ['mau order', 'bisa order', 'mau beli', 'beli', 'mau pesan', 'pesan']):
         matched_product = None
         try:
-            # Ambil semua nama produk dari database dan cari kecocokan dengan pesan pengguna
             products = products_collection.find({}, {"name": 1})  # Ambil hanya kolom 'name'
             for product in products:
                 if product['name'].lower() in user_message:
                     matched_product = product['name']
                     break
 
-            # Jika produk ditemukan, ambil detail dari `responses`
             if matched_product:
                 product_responses = responses.get(matched_product.lower())
                 if product_responses:
@@ -154,7 +152,7 @@ async def handle_message(update, context):
             await update.message.reply_text(response)
             return
 
-    for product, usage_product_responses in usage_responses.items():
+    for product, usage_product_responses in responses.items():
         if product in user_message:
             response = random.choice(usage_product_responses)
             await update.message.reply_text(response)
@@ -162,4 +160,8 @@ async def handle_message(update, context):
 
     # Jika tidak ada keyword yang dikenali, balas dengan pesan default
     await update.message.reply_text("Maaf, saya tidak mengerti. Apakah Anda ingin tahu tentang produk lain atau ada pertanyaan lainnya?")
-    await show_options(update, context)
+    
+    # Tampilkan opsi hanya jika belum ditampilkan
+    if not options_shown:
+        await show_options(update, context)
+        options_shown = True  # Menandai bahwa opsi sudah ditampilkan
