@@ -155,6 +155,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     if any(greet in user_message for greet in ['halo', 'hi', 'selamat pagi', 'selamat siang', 'selamat malam', 'hey', 'hai']):
         await update.message.reply_text("Halo Latier! Selamat datang di Latitaka Borneo. Apa yang bisa kami bantu hari ini?")
         await show_options(update, context)
+        return
 
     # Menangani pertanyaan produk spesifik
     for product in responses.keys():
@@ -171,6 +172,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     # Jika produk tidak dikenali, balas dengan pesan default
     await update.message.reply_text("Maaf, saya tidak mengerti. Apakah Anda ingin tahu tentang produk lain atau ada pertanyaan lainnya?")
+    await show_options(update, context)
 
     # Specific inquiries
     if any(term in user_message for term in ['produk', 'daftar produk', 'lihat produk', 'tampilkan produk']):
