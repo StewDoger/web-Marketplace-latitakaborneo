@@ -152,16 +152,10 @@ async def handle_message(update, context):
             await update.message.reply_text(response)
             return
 
-    for product, usage_product_responses in responses.items():
-        if product in user_message:
-            response = random.choice(usage_product_responses)
-            await update.message.reply_text(response)
-            return
-
     # Jika tidak ada keyword yang dikenali, balas dengan pesan default
     await update.message.reply_text("Maaf, saya tidak mengerti. Apakah Anda ingin tahu tentang produk lain atau ada pertanyaan lainnya?")
-    
+
     # Tampilkan opsi hanya jika belum ditampilkan
     if not options_shown:
         await show_options(update, context)
-        options_shown = True  # Menandai bahwa opsi sudah ditampilkan
+        options_shown = False  
