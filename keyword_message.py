@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 from handlers import show_options, handle_lihat_produk, handle_cara_pembelian, handle_cara_bayar
 
-# List of responses for each product with details
+# Respon produk detail
 responses = {
     'akar bajakah': [
         "Halo Latier, untuk akar bajakah, beratnya 100g. Dikenal untuk meningkatkan kesehatan dan daya tahan tubuh. Cara penggunaannya dapat diseduh atau direbus. Apakah ada yang ingin kamu tanyakan lebih lanjut?",
