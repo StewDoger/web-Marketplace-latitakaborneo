@@ -1,161 +1,134 @@
 import random
+import json
+from datetime import datetime
 from telegram import Update
 from telegram.ext import ContextTypes
 from database import products_collection
 from handlers import show_options, handle_lihat_produk, handle_cara_pembelian, handle_cara_bayar
 
-# Respon produk detail
-responses = {
-    'akar bajakah': [
-        "Halo Latier, untuk akar bajakah, beratnya 100g. Dikenal untuk meningkatkan kesehatan dan daya tahan tubuh. Cara penggunaannya dapat diseduh atau direbus.",
-        "Halo Latier, kami punya akar bajakah original dan yang sudah diracik.",
-        "Hai Latier, akar bajakah terkenal dengan banyak manfaat.",
-        "Halo Latier, untuk akar bajakah, kami bisa bantu menjelaskan cara konsumsi dan dosis yang tepat."
-    ],
-    'pasak bumi': [
-        "Halo Latier, berat Pasak Bumi adalah 50g dan saat ini tidak tersedia. Kami bisa rekomendasikan produk lain yang bermanfaat.",
-        "Sayang sekali, Latier. Pasak Bumi saat ini tidak ready. Apakah kamu tertarik dengan produk herbal lainnya?",
-        "Maaf, Latier. Pasak Bumi sedang habis. Kami punya alternatif lain yang bisa membantu kesehatanmu."
-    ],
-    'minyak uyut': [
-        "Hallo Latier, Minyak Uyut kami beratnya 100ml dan efektif untuk mengurangi pegangan otot, keseleo, dan asma.",
-        "Halo Latier, berikut manfaat dari Minyak Uyut Latitaka: MENGURANGI PEGEL-PEGEL, KESELEO, ASMA, dan PERUT KEMBUNG.",
-        "Halo Latier, Minyak Uyut kami efektif untuk berbagai keluhan."
-    ],
-    'madu': [
-        "Hallo Latier, madu Latitaka memiliki berat 500ml dan kaya manfaat.",
-        "Halo Latier, kami memiliki madu alami yang sangat bermanfaat untuk kesehatan.",
-        "Hallo Latier, madu kami juga tersedia dalam berbagai varian rasa."
-    ],
-    'danum mea': [
-        "Hallo Latier, Danum Mea beratnya 250gr/bungkus dan banyak dicari karena khasiatnya.",
-        "Halo Latier, kami sering merekomendasikan Danum Mea untuk kesehatan.",
-        "Hallo Latier, produk Danum Mea ini bagus untuk perawatan kesehatan."
-    ],
-    'nyaro nyerua': [
-        "Hallo Latier, harga Nyaro Nyerua 1 pax/4 bungkus Rp. 150.000. Kami juga bisa menjelaskan manfaatnya.",
-        "Halo Latier, Nyaro Nyerua sangat baik untuk kesehatan.",
-        "Hallo Latier, kami memiliki Nyaro Nyerua dengan banyak khasiat."
-    ],
-    'hampers': [
-        "Hallo Latier, kami memiliki hampers menarik yang berisi berbagai produk kami.",
-        "Halo Latier, hampers Latitaka Borneo adalah pilihan sempurna untuk hadiah.",
-        "Hallo Latier, kami bisa membuat hampers sesuai permintaan."
-    ],
-    'pupur bosa': [
-        "Hallo Latier, Pupur Bosa kami terbuat dari bahan alami dan banyak dicari.",
-        "Halo Latier, Pupur Bosa cocok untuk perawatan wajah.",
-        "Hallo Latier, kami bisa menjelaskan khasiat Pupur Bosa untuk kecantikan."
-    ],
-    'minyak lengga unyut': [
-        "Hallo Latier, Minyak Lengga Unyut kami sangat efektif untuk mengatasi berbagai keluhan. Beratnya 100ml.",
-        "Halo Latier, Minyak Lengga Unyut dikenal untuk mengurangi nyeri otot.",
-        "Hallo Latier, kami memiliki informasi lengkap tentang Minyak Lengga Unyut."
-    ],
-    'akar dara': [
-        "Hallo Latier, Akar Dara kami banyak digunakan dalam pengobatan tradisional. Beratnya 50g.",
-        "Halo Latier, kami punya Akar Dara dengan kualitas terbaik.",
-        "Hallo Latier, Akar Dara dapat membantu menjaga kesehatan."
-    ],
-    'akar tampala': [
-        "Hallo Latier, Akar Tampala terkenal karena manfaat kesehatannya. Beratnya 50g.",
-        "Halo Latier, kami punya Akar Tampala yang berkualitas.",
-        "Hallo Latier, Akar Tampala sangat bermanfaat untuk kesehatan."
-    ],
-    'kalawait': [
-        "Hallo Latier, Kalawait adalah produk herbal yang bagus untuk kesehatan. Beratnya 100g.",
-        "Halo Latier, kami menyediakan Kalawait yang berkualitas.",
-        "Hallo Latier, Kalawait memiliki banyak manfaat."
-    ],
-    'racik latitaka': [
-        "Hallo Latier, Racik Latitaka adalah campuran herbal terbaik untuk kesehatan.",
-        "Halo Latier, Racik Latitaka kami bisa disesuaikan dengan kebutuhan.",
-        "Hallo Latier, kami dapat menjelaskan khasiat Racik Latitaka."
-    ],
-    'bawe bujangk': [
-        "Hallo Latier, Bawe Bujangk memiliki khasiat yang sangat baik untuk kesehatan. Beratnya 100g.",
-        "Halo Latier, kami memiliki Bawe Bujangk dengan kualitas terbaik.",
-        "Hallo Latier, Bawe Bujangk bisa membantu menjaga stamina."
-    ]
-}
+# Load responses from JSON
+with open("responses.json", "r") as f:
+    responses = json.load(f)
 
-RESPONSE_MAP = {
-    'produk': handle_lihat_produk,
-    'cara beli': handle_cara_pembelian,
-    'cara bayar': handle_cara_bayar
-}
+# Fungsi untuk menentukan sapaan berdasarkan waktu
+def get_greeting():
+    current_hour = datetime.now().hour
+    if 5 <= current_hour < 12:
+        return "Selamat pagi"
+    elif 12 <= current_hour < 18:
+        return "Selamat siang"
+    else:
+        return "Selamat malam"
 
-options_shown = False
-
-async def handle_message(update, context):
-    global options_shown  # Mengakses variabel global
+# Fungsi rule untuk sapaan
+async def greet_user(update, context):
     user_message = update.message.text.lower()
+    greetings = ['halo', 'hi', 'selamat pagi', 'selamat siang', 'selamat malam', 'hey', 'hai']
+    if any(greet in user_message for greet in greetings):
+        greeting = get_greeting()
+        await update.message.reply_text(f"{greeting} Latier! Selamat datang di Latitaka Borneo. Apa yang bisa kami bantu hari ini?")
+        await show_options(update, context)
+        return True
+    return False
 
-    # Respon untuk sapaan umum
-    if any(greet in user_message for greet in ['halo', 'hi', 'selamat pagi', 'selamat siang', 'selamat malam', 'hey', 'hai']):
-        await update.message.reply_text("Halo Latier! Selamat datang di Latitaka Borneo. Apa yang bisa kami bantu hari ini?")
-
-        # Tampilkan opsi hanya jika belum ditampilkan
-        if not options_shown:
-            await show_options(update, context)
-            options_shown = True  # Menandai bahwa opsi sudah ditampilkan
-        return
-
-    # Respon untuk permintaan produk atau daftar produk
+# Fungsi rule untuk produk
+async def show_products(update, context):
+    user_message = update.message.text.lower()
     if any(term in user_message for term in ['produk', 'daftar produk', 'lihat produk', 'tampilkan produk']):
         await handle_lihat_produk(update, context)
-        return
+        return True
+    return False
 
-    # Respon untuk permintaan cara pembelian
-    if 'cara beli' in user_message or 'pembelian' in user_message:
+# Fungsi rule untuk cara pembelian
+async def show_purchase_method(update, context):
+    user_message = update.message.text.lower()
+    keywords = ['cara beli', 'beli', 'pembelian', 'pesan', 'order', 'pemesanan', 'cara order', 'cara pesan']
+    if any(keyword in user_message for keyword in keywords):
         await handle_cara_pembelian(update, context)
-        return
+        return True
+    return False
 
-    # Respon untuk permintaan cara pembayaran
-    if 'cara bayar' in user_message or 'metode pembayaran' in user_message:
+# Fungsi rule untuk cara pembayaran
+async def show_payment_method(update, context):
+    user_message = update.message.text.lower()
+    keywords = ['cara bayar', 'bayar', 'metode pembayaran', 'transfer', 'pembayaran', 'rekening', 'cara membayar']
+    if any(keyword in user_message for keyword in keywords):
         await handle_cara_bayar(update, context)
-        return
+        return True
+    return False
 
-    # Respon untuk permintaan order dengan nama produk yang spesifik
-    if any(term in user_message for term in ['mau order', 'bisa order', 'mau beli', 'beli', 'mau pesan', 'pesan']):
-        matched_product = None
-        try:
-            products = products_collection.find({}, {"name": 1})  # Ambil hanya kolom 'name'
-            for product in products:
-                if product['name'].lower() in user_message:
-                    matched_product = product['name']
-                    break
+# Fungsi rule untuk produk spesifik dan manfaatnya
+async def show_specific_product(update, context):
+    user_message = update.message.text.lower()
+    matched_product = None
 
-            if matched_product:
-                product_responses = responses.get(matched_product.lower())
-                if product_responses:
-                    response = random.choice(product_responses)
-                    await update.message.reply_text(response)
-                else:
-                    await update.message.reply_text(f"Maaf, informasi lebih lanjut tentang {matched_product} belum tersedia.")
-            else:
-                await update.message.reply_text("Halo Latier, boleh kami bantu ingin produk apa?")
-        except Exception as e:
-            print(f"Error: {e}")
-            await update.message.reply_text("Maaf, terjadi kesalahan saat memproses permintaan Anda. Silakan coba lagi nanti.")
-        return
-
-    # Respon untuk ucapan terima kasih
-    if any(term in user_message for term in ['terima kasih', 'makasih', 'thank you']):
-        await update.message.reply_text("Sama-sama, Latier! Jika ada pertanyaan lain, jangan ragu untuk bertanya.")
-        return
-
-    # Pengecekan untuk keyword produk yang terdapat di responses atau usage_responses
-    for product, product_responses in responses.items():
+    # Mencari produk dalam user_message yang sesuai dengan yang ada di responses.json
+    for product in responses.keys():
         if product in user_message:
-            response = random.choice(product_responses)
-            await update.message.reply_text(response)
-            return
+            matched_product = product
+            break
 
-    # Jika tidak ada keyword yang dikenali, balas dengan pesan default
+    if matched_product:
+        # Ambil deskripsi produk, manfaat, dan cara pengolahan
+        product_description = responses[matched_product].get("description")
+        product_benefits = responses[matched_product].get("manfaat")
+        product_processing = responses[matched_product].get("cara pengolahan")
+
+        # Jika user bertanya tentang manfaat
+        if 'manfaat' in user_message or 'khasiat' in user_message:
+            if isinstance(product_benefits, list) and product_benefits:
+                # Kirim manfaat produk secara acak
+                response = random.choice(product_benefits)
+                await update.message.reply_text(response)
+            else:
+                await update.message.reply_text(f"Maaf, manfaat untuk {matched_product} belum tersedia.")
+        elif 'cara pengolahan' in user_message or 'pengolahan' in user_message:
+            if isinstance(product_processing, list) and product_processing:
+                # Kirim cara pengolahan produk secara acak
+                response = random.choice(product_processing)
+                await update.message.reply_text(response)
+            elif isinstance(product_processing, str) and product_processing:
+                # Jika pengolahan hanya berupa string, kirim langsung
+                await update.message.reply_text(product_processing)
+            else:
+                await update.message.reply_text(f"Maaf, cara pengolahan untuk {matched_product} belum tersedia.")
+        else:
+            # Jika tidak ada pertanyaan tentang manfaat atau cara pengolahan, kirim deskripsi produk
+            if isinstance(product_description, list) and product_description:
+                response = random.choice(product_description)
+                await update.message.reply_text(response)
+            elif isinstance(product_description, str) and product_description:
+                await update.message.reply_text(product_description)
+            else:
+                await update.message.reply_text(f"Maaf, informasi lebih lanjut tentang {matched_product} belum tersedia.")
+    else:
+        await update.message.reply_text("Maaf, produk yang Anda cari tidak ditemukan.")
+    return matched_product is not None
+
+# Fungsi rule untuk ucapan terima kasih
+async def respond_to_thanks(update, context):
+    user_message = update.message.text.lower()
+    thanks_terms = ['terima kasih', 'makasih', 'thank you']
+    if any(term in user_message for term in thanks_terms):
+        await update.message.reply_text("Sama-sama, Latier! Jika ada pertanyaan lain, jangan ragu untuk bertanya.")
+        return True
+    return False
+
+# Fungsi utama yang menjalankan semua rule secara berurutan
+async def handle_message(update, context):
+    if await greet_user(update, context):
+        return
+    if await show_products(update, context):
+        return
+    if await show_purchase_method(update, context):
+        return
+    if await show_payment_method(update, context):
+        return
+    if await show_specific_product(update, context):
+        return
+    if await respond_to_thanks(update, context):
+        return
+
+    # Jika tidak ada aturan yang cocok
     await update.message.reply_text("Maaf, saya tidak mengerti. Apakah Anda ingin tahu tentang produk lain atau ada pertanyaan lainnya?")
-
-    # Tampilkan opsi hanya jika belum ditampilkan
-    if not options_shown:
-        await show_options(update, context)
-        options_shown = False  
+    await show_options(update, context)
