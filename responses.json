@@ -1,9 +1,8 @@
 {
     "akar bajakah": {
         "description": [
-            "Halo Latier, untuk akar bajakah, beratnya 100g. Dikenal untuk meningkatkan kesehatan dan daya tahan tubuh. Cara penggunaannya dapat diseduh atau direbus.",
+            "Halo Latier, untuk akar bajakah, beratnya 100g. Dikenal untuk meningkatkan kesehatan dan daya tahan tubuh.",
             "Halo Latier, kami punya akar bajakah original dan yang sudah diracik.",
-            "Hai Latier, akar bajakah terkenal dengan banyak manfaat.",
             "Halo Latier, untuk akar bajakah, kami bisa bantu menjelaskan cara konsumsi dan dosis yang tepat."
         ],
         "manfaat": [
@@ -15,8 +14,7 @@
     },
     "pasak bumi": {
         "description": [
-            "Halo Latier, berat Pasak Bumi adalah 50g dan saat ini tidak tersedia. Kami bisa rekomendasikan produk lain yang bermanfaat.",
-            "Sayang sekali, Latier. Pasak Bumi saat ini tidak ready. Apakah kamu tertarik dengan produk herbal lainnya?",
+            "Halo Latier, berat Pasak Bumi adalah 50g.",
             "Maaf, Latier. Pasak Bumi sedang habis. Kami punya alternatif lain yang bisa membantu kesehatanmu."
         ],
         "manfaat": [
@@ -29,7 +27,6 @@
     "minyak uyut": {
         "description": [
             "Hallo Latier, Minyak Uyut kami beratnya 100ml dan efektif untuk mengurangi pegangan otot, keseleo, dan asma.",
-            "Halo Latier, berikut manfaat dari Minyak Uyut Latitaka: MENGURANGI PEGEL-PEGEL, KESELEO, ASMA, dan PERUT KEMBUNG.",
             "Halo Latier, Minyak Uyut kami efektif untuk berbagai keluhan."
         ],
         "manfaat": [
@@ -55,18 +52,16 @@
     "danum mea": {
         "description": [
             "Hallo Latier, Danum Mea beratnya 250gr/bungkus dan banyak dicari karena khasiatnya.",
-            "Halo Latier, kami sering merekomendasikan Danum Mea untuk kesehatan.",
             "Hallo Latier, produk Danum Mea ini bagus untuk perawatan kesehatan."
         ],
         "manfaat": [
-            "ASAM LAMBUNG, ASAM URAT,KOLESTEROL, HEPATITIS, INFEKSI LAMBUNG, DETOX, HIPERTESNSI, DIABETES, ALERGI"
+            "Asam Lambung\nAsam Urat\nKolestrol\nHepatitis\nInfeksi Lambung\nDetox\nHipertensi\nDiabetes\nAlergi"
         ],
         "cara pengolahan": "Dapat dikonsumsi dalam bentuk teh atau ramuan herbal, dapat juga dimasukkan dalam masakan."
     },
     "nyaro nyerua": {
         "description": [
-            "Hallo Latier, harga Nyaro Nyerua 1 pax/4 bungkus Rp. 150.000. Kami juga bisa menjelaskan manfaatnya.",
-            "Halo Latier, Nyaro Nyerua sangat baik untuk kesehatan.",
+            "Hallo Latier, harga Nyaro Nyerua 1 pax/4 bungkus Rp. 150.000.",
             "Hallo Latier, kami memiliki Nyaro Nyerua dengan banyak khasiat."
         ],
         "manfaat": [
@@ -105,8 +100,7 @@
     "minyak lengga unyut": {
         "description": [
             "Hallo Latier, Minyak Lengga Unyut kami sangat efektif untuk mengatasi berbagai keluhan. Beratnya 100ml.",
-            "Halo Latier, Minyak Lengga Unyut dikenal untuk mengurangi nyeri otot.",
-            "Hallo Latier, kami memiliki informasi lengkap tentang Minyak Lengga Unyut."
+            "Halo Latier, Minyak Lengga Unyut dikenal untuk mengurangi nyeri otot."
         ],
         "manfaat": [
             "Mengurangi nyeri dan pegal",
@@ -144,8 +138,7 @@
     "kalawait": {
         "description": [
             "Hallo Latier, Kalawait adalah produk herbal yang bagus untuk kesehatan. Beratnya 100g.",
-            "Halo Latier, kami menyediakan Kalawait yang berkualitas.",
-            "Hallo Latier, Kalawait memiliki banyak manfaat."
+            "Halo Latier, kami menyediakan Kalawait yang berkualitas."
         ],
         "manfaat": [
             "Meningkatkan kesehatan secara umum",
@@ -157,8 +150,7 @@
     "racik latitaka": {
         "description": [
             "Hallo Latier, Racik Latitaka adalah campuran herbal terbaik untuk kesehatan.",
-            "Halo Latier, Racik Latitaka kami bisa disesuaikan dengan kebutuhan.",
-            "Hallo Latier, kami dapat menjelaskan khasiat Racik Latitaka."
+            "Halo Latier, Racik Latitaka kami bisa disesuaikan dengan kebutuhan."
         ],
         "manfaat": [
             "Meningkatkan kesehatan tubuh",
@@ -170,7 +162,6 @@
     "bawe bujangk": {
         "description": [
             "Hallo Latier, Bawe Bujangk memiliki khasiat yang sangat baik untuk kesehatan. Beratnya 100g.",
-            "Halo Latier, kami memiliki Bawe Bujangk dengan kualitas terbaik.",
             "Hallo Latier, Bawe Bujangk bisa membantu menjaga stamina."
         ],
         "manfaat": [

@@ -13,32 +13,24 @@ async def show_options(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     if update.callback_query:
-        await update.callback_query.message.reply_text('Silakan pilih opsi di bawah ini:', reply_markup=reply_markup)
+        await update.callback_query.edit_message_text('Silakan pilih opsi di bawah ini:', reply_markup=reply_markup)
     elif update.message:
         await update.message.reply_text('Silakan pilih opsi di bawah ini:', reply_markup=reply_markup)
 
 # Fungsi untuk kembali ke menu utama
 async def handle_kembali_ke_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-
     keyboard = [
         [InlineKeyboardButton("Lihat Produk", callback_data='lihat_produk')],
         [InlineKeyboardButton("Cara Pembayaran", callback_data='cara_bayar')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
+    query = update.callback_query
+    await query.answer()
     await query.edit_message_text('Silakan pilih opsi di bawah ini:', reply_markup=reply_markup)
 
 # Fungsi untuk menampilkan daftar produk dari MongoDB
 async def handle_lihat_produk(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # Pastikan hanya `callback_query` yang diproses
-    if not update.callback_query:
-        await update.message.reply_text("Maaf, ada kesalahan dalam permintaan Anda.")
-        return
-
-    query = update.callback_query
-    await query.answer()
     produk_keyboard = []
 
     try:
@@ -53,19 +45,18 @@ async def handle_lihat_produk(update: Update, context: ContextTypes.DEFAULT_TYPE
 
         # Tampilkan daftar produk atau pesan jika tidak ada produk
         if produk_keyboard:
-            await query.edit_message_text(text="Pilih produk untuk melihat detailnya:", reply_markup=reply_markup)
+            if update.callback_query:
+                await update.callback_query.edit_message_text("Pilih produk untuk melihat detailnya:", reply_markup=reply_markup)
+            else:
+                await update.message.reply_text("Pilih produk untuk melihat detailnya:", reply_markup=reply_markup)
         else:
-            await query.edit_message_text(text="Tidak ada produk yang tersedia.")
+            await update.message.reply_text("Tidak ada produk yang tersedia.")
     except Exception as e:
-        await query.edit_message_text(text="Terjadi kesalahan saat mengambil daftar produk. Silakan coba lagi nanti.")
+        await update.message.reply_text("Terjadi kesalahan saat mengambil daftar produk. Silakan coba lagi nanti.")
         print(f"Error: {e}")
 
 # Fungsi untuk menampilkan detail produk yang dipilih
 async def handle_produk_detail(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not update.callback_query:
-        await update.message.reply_text("Maaf, ada kesalahan dalam permintaan Anda.")
-        return
-
     query = update.callback_query
     await query.answer()
     produk_id = query.data.split('_')[1]
@@ -117,6 +108,8 @@ async def handle_callback_query(update: Update, context: ContextTypes.DEFAULT_TY
 
     if query.data == 'menu_utama':
         await handle_kembali_ke_menu(update, context)
+    elif query.data == 'lihat_produk':
+        await handle_lihat_produk(update, context)
     elif query.data.startswith('produk_'):
         await handle_produk_detail(update, context)
     elif query.data == 'cara_bayar':
