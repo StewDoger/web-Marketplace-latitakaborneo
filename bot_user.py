@@ -1,4 +1,5 @@
-import re
+import os
+from dotenv import load_dotenv
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, CallbackQueryHandler
 from handlers import handle_callback_query
 from keyword_message import handle_message
@@ -10,8 +11,13 @@ from handlers import (
     handle_kembali_ke_menu
 )
 
+# Load .env
+load_dotenv()
+
+telegram_token = os.getenv('TELEGRAM_TOKEN')
+
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('7733149434:AAHY_v6O5Nv6hKQUyY74-BZx8nJUfN7ADFo').build()
+    application = ApplicationBuilder().token(telegram_token).build()
 
     # Handler untuk pesan "halo" dan lain-lain
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
