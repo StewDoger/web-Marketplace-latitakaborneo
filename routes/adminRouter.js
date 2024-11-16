@@ -1,11 +1,12 @@
+// routes/adminRoutes.js
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/product'); // Model produk Anda
+const Produk = require('../models/stock');
 
 // Rute untuk menampilkan halaman update stok
 router.get('/update-stok', async (req, res) => {
     try {
-        const products = await Product.find();  // Ambil data produk dari database
+        const products = await Produk.find();  // Ambil data produk dari database
         res.render('admin/update-stok', { products });
     } catch (err) {
         console.error(err);
@@ -16,7 +17,6 @@ router.get('/update-stok', async (req, res) => {
 // Rute untuk menangani pembaruan stok
 router.post('/update-stok', async (req, res) => {
     try {
-        // Loop melalui semua produk dan update stok yang diubah
         const productIds = Object.keys(req.body);  // Ambil semua kunci (ID produk)
         for (let id of productIds) {
             if (id.startsWith('stock_')) {
@@ -24,7 +24,7 @@ router.post('/update-stok', async (req, res) => {
                 const stockValue = req.body[id];  // Ambil nilai stok yang baru
 
                 // Update stok produk di database
-                await Product.findByIdAndUpdate(productId, { stock: stockValue });
+                await Produk.findByIdAndUpdate(productId, { stock: stockValue });
             }
         }
 

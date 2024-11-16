@@ -1,0 +1,21 @@
+<!-- views/admin/update-stok.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Stok</title>
+</head>
+<body>
+    <h1>Update Stok Produk</h1>
+    <form method="POST" action="/admin/update-stok">
+        <% products.forEach(function(product) { %>
+            <div>
+                <label><%= product.name %></label>
+                <input type="number" name="stock_<%= product._id %>" value="<%= product.stock %>">
+            </div>
+        <% }); %>
+        <button type="submit">Update Stok</button>
+    </form>
+</body>
+</html>

@@ -9,12 +9,12 @@
 <body>
     <h1>Daftar Produk</h1>
     <ul>
-        <% items.forEach(function(item) { %>
+        <% products.forEach(function(product) { %>
             <li>
-                <strong><%= item.name %></strong><br>
-                <%= item.description %><br>
-                Harga: Rp <%= item.price %><br>
-                Stok: <%= item.stock %><br>
+                <strong><%= product.name %></strong><br>
+                <%= product.description %><br>
+                Harga: Rp <%= product.price %><br>
+                Stok: <%= product.stock %><br>
             </li>
         <% }); %>
     </ul>
