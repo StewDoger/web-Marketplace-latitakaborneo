@@ -1,0 +1,22 @@
+<!-- views/inventory.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+</head>
+<body>
+    <h1>Daftar Produk</h1>
+    <ul>
+        <% items.forEach(function(item) { %>
+            <li>
+                <strong><%= item.name %></strong><br>
+                <%= item.description %><br>
+                Harga: Rp <%= item.price %><br>
+                Stok: <%= item.stock %><br>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

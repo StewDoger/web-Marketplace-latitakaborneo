@@ -337,3 +337,60 @@ a.tbl-pink:hover {
     width: 80px;
     padding: 10px;
 }
+
+#UpdateStok {
+    text-align: center;
+    padding: 40px 0;
+}
+
+#UpdateStok h2 {
+    font-size: 36px;
+    color: #5a0664;
+    margin-bottom: 20px;
+}
+
+#UpdateStok p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #e83e8c;
+    color: white;
+}
+
+input[type="number"] {
+    padding: 5px;
+    width: 80px;
+    text-align: center;
+}
+
+button.tbl-pink {
+    padding: 12px 20px;
+    background-color: #e83e8c;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.tbl-pink:hover {
+    background-color: #bd2a70;
+}
