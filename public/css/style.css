@@ -6,9 +6,10 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #dfa4d6;
+    background-color: #d3e6d3; /* Light green, reflecting Borneo's lush environment */
     margin: 0;
 }
+
 .wrapper {
     width: 90%;
     max-width: 1100px;
@@ -19,8 +20,8 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #e882c1;
-    border-bottom: 2px solid hsl(315, 69%, 12%);
+    background-color: #5a7f5d; /* Forest green, reflecting Borneo's forests */
+    border-bottom: 2px solid #3d563d; /* Darker green for contrast */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -34,7 +35,7 @@ nav {
 nav .Logo a {
     font-size: 24px;
     font-weight: bold;
-    color: #2c0229;
+    color: #3d563d; /* Dark green */
     text-decoration: none;
 }
 
@@ -48,14 +49,14 @@ nav .Menu ul li {
 }
 
 nav .Menu ul li a {
-    color: #333333;
+    color: #2a2a2a; /* Dark gray for text */
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 nav .Menu ul li a:hover {
-    color: #cdd5de;
+    color: #ffd700; /* Gold, symbolizing richness and nature */
 }
 
 section {
@@ -72,7 +73,7 @@ section {
 
 h2 {
     font-size: 36px;
-    color: #333333;
+    color: #2a2a2a; /* Dark gray */
     margin-bottom: 20px;
     text-align: center;
 }
@@ -90,19 +91,19 @@ a.tbl-pink {
 }
 
 a.tbl-biru {
-    background-color: #5a0664;
+    background-color: #2e8b57; /* Sea green, reflecting the tropical plants */
 }
 
 a.tbl-pink {
-    background-color: #e83e8c;
+    background-color: #1a1317;
 }
 
 a.tbl-biru:hover {
-    background-color: #421849;
+    background-color: #228b22; /* Dark green */
 }
 
 a.tbl-pink:hover {
-    background-color: #bd2a70;
+    background-color: #473434;
 }
 
 #Produk h2 {
@@ -146,8 +147,8 @@ a.tbl-pink:hover {
     bottom: 25px;
     left: 0;
     width: 100%;
-    background-color: #da6cc2;
-    color: #724646;
+    background-color: #6a4e23; /* Earthy brown, reflecting Borneo’s soil */
+    color: #f0f0f0; /* Light gray */
     padding: 20px;
     border-top: 2px solid #0e2134;
     display: flex;
@@ -184,12 +185,6 @@ a.tbl-pink:hover {
 }
 
 .wrapper #Order img {
-    width: 30px;
-    height: auto;
-    margin-right: 10px;
-}
-
-.wrapper #Konsultasi img {
     width: 30px;
     height: auto;
     margin-right: 10px;
@@ -249,14 +244,13 @@ a.tbl-pink:hover {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #691d64;
-    color: #e9ef7f;
+    background-color: #4f2c1d; /* Dark brown */
+    color: #e9ef7f; /* Yellow-gold, symbolizing nature's richness */
     text-align: center;
     padding: 10px 0;
-    z-index: 1; 
+    z-index: 1;
 }
 
-/* Posisi dan styling untuk ikon chat */
 .chat-icon {
     position: fixed;
     bottom: 20px;
@@ -271,12 +265,10 @@ a.tbl-pink:hover {
     cursor: pointer; /* Ubah kursor saat hover */
 }
 
-/* Efek hover untuk ikon chat */
 .chat-icon img:hover {
     opacity: 0.8; /* Efek transparansi saat hover */
 }
 
-/* Modal styling */
 .chat-modal {
     display: none; /* Sembunyikan modal secara default */
     position: fixed;
@@ -313,7 +305,6 @@ a.tbl-pink:hover {
     cursor: pointer;
 }
 
-/* Styling untuk chat box */
 .chat-box {
     display: flex;
     flex-direction: column;
@@ -371,26 +362,25 @@ th, td {
 }
 
 th {
-    background-color: #e83e8c;
+    background-color: #8B4513; /* SaddleBrown, earthy tone */
     color: white;
 }
 
 input[type="number"] {
-    padding: 5px;
+    padding: 10px;
     width: 80px;
-    text-align: center;
+    border: 1px solid #ddd;
 }
 
-button.tbl-pink {
-    padding: 12px 20px;
-    background-color: #e83e8c;
+button[type="submit"] {
+    background-color: #8B4513; /* SaddleBrown */
     color: white;
+    padding: 10px 20px;
     border: none;
-    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
-button.tbl-pink:hover {
-    background-color: #bd2a70;
+button[type="submit"]:hover {
+    background-color: #A0522D; /* Sienna, slightly lighter */
 }
