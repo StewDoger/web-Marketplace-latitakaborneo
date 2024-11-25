@@ -41,7 +41,7 @@ nav {
 nav .Logo a {
     font-size: 24px;
     font-weight: bold;
-    color: #3d563d; /* Dark green */
+    color: #313a31; /* Dark green */
     text-decoration: none;
 }
 
@@ -73,7 +73,7 @@ section {
 
 .kolom .deskripsi {
     font-size: 18px;
-    color: #3f193b;
+    color: #000000;
     margin-bottom: 10px;
 }
 
@@ -89,7 +89,7 @@ a.tbl-pink {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 20px;
-    color: #d1c1cb;
+    color: #fffeff;
     font-weight: bold;
     text-decoration: none;
     border-radius: 5px;
@@ -148,56 +148,63 @@ a.tbl-pink:hover {
     margin-bottom: 10px;
 }
 
-.footer {
-    position: relative;
-    background-color: #6a4e23; /* Earthy brown */
-    color: #f0f0f0; /* Light gray */
-    padding: 10px 10px;
-    border-top: 2px solid #0e2134; /* Darker border for separation */
+/* Gaya untuk kontainer utama footer */
+#footer-container {
+    background-color: #111; /* Warna latar belakang */
+    color: #fff; /* Warna teks */
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Gaya untuk bagian dalam footer */
+#footer-sections {
     display: flex;
-    justify-content: center; /* Align content in the center */
-    align-items: center; /* Vertically center the content */
-    width: 100%;
-    margin-top: auto; /* Pastikan footer tidak menutupi konten */
+    justify-content: space-around; /* Membuat jarak antar bagian */
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-
-.footer-content {
-    text-align: center;
-    color: #e9ef7f; /* Yellow-gold color for copyright text */
-    font-size: 14px;
+/* Gaya untuk setiap bagian footer */
+#footer-sections > div {
+    flex: 1;
+    margin: 0 10px;
 }
 
-.footer p {
-    margin: 0; /* Menghapus margin di sekitar teks */
-}
-
-.footer-section {
-    margin-right: 20px;
-}
-
-.footer-section:last-child {
-    margin-right: 0;
-}
-
-.footer-section h4 {
-    font-size: 16px;
-    color: #333333;
+/* Gaya judul bagian footer */
+#footer-sections h4 {
+    font-size: 1.2em;
     margin-bottom: 10px;
+    color: #f4a261;
 }
 
-.footer-section p {
-    color: #3a0835;
+/* Gaya teks bagian footer */
+#footer-sections p {
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin: 0;
 }
 
-.footer-section img {
+/* Gaya untuk bagian logo Instagram */
+#footer-social a {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#instagram-logo {
     width: 30px;
-    height: auto;
-    margin-right: 10px;
+    height: 30px;
 }
 
-.footer-section a:hover {
-    text-decoration: underline; /* Efek hover saat tautan diarahkan */
+/* Gaya untuk bagian bawah footer */
+#footer-bottom {
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    color: #ccc;
 }
 
 .wrapper #Order img {
@@ -212,22 +219,51 @@ a.tbl-pink:hover {
     margin-right: 10px;
 }
 
-#Konsultasi {
-    margin-top: 50px;
+/* Styling untuk section konsultasi */
+.konsultasi-section {
+    padding: 97px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.0);
     text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#Konsultasi h2 {
-    font-size: 36px;
-    color: #340936;
+/* Styling untuk heading h2 di dalam konsultasi */
+.konsultasi-section h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+/* Styling untuk paragraf di dalam konsultasi */
+.konsultasi-section p {
+    font-size: 1.1em;
+    color: #555;
     margin-bottom: 20px;
 }
 
-#Konsultasi p {
-    font-size: 16px;
-    color: #000000;
-    line-height: 1.6;
-    margin-bottom: 20px;
+/* Styling untuk link Instagram */
+.konsultasi-section .instagram-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.konsultasi-section .instagram-link img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.konsultasi-section .instagram-link span {
+    font-size: 1.2em;
+    color: #0077b5;
+}
+
+/* Styling saat hover pada link */
+.konsultasi-section .instagram-link a:hover {
+    text-decoration: underline;
+    color: #005fa3;
 }
 
 .instagram-link {
@@ -388,19 +424,209 @@ input[type="number"] {
     border: 1px solid #ddd;
 }
 
-button[type="submit"] {
-    background-color: #8B4513; /* SaddleBrown */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-
 button[type="submit"]:hover {
     background-color: #A0522D; /* Sienna, slightly lighter */
 }
 
 .main-content {
-    padding-bottom: 80px; /* Memberikan ruang di bawah konten untuk footer */
+    padding-bottom: 80px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+/* Styling untuk form */
+.form-login {
+    padding: 50px;
+    border-radius: 5px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling untuk label dan input */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styling untuk Daftar Produk */
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.product-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.product-description {
+    font-style: italic;
+    color: #555;
+}
+
+.product-price, .product-stock {
+    margin: 5px 0;
+}
+
+/* Styling untuk Daftar Produk - Inventory */
+#Inventory {
+    margin-top: 20px;
+}
+
+/* Styling untuk form Update Stok */
+.update-stock-form {
+    margin: 10px 0;
+}
+
+.update-stock-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.update-stock-button:hover {
+    background-color: #45a049;
+}
+
+/* Styling untuk Form Hapus Produk */
+.delete-product-form {
+    margin-top: 10px;
+}
+
+.delete-product-button {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-product-button:hover {
+    background-color: darkred;
+}
+
+/* Styling untuk Form Tambah Produk Baru */
+.add-product-section {
+    margin-top: 30px;
+}
+
+.add-product-form {
+    display: grid;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.add-product-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-product-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-product-button:hover {
+    background-color: #45a049;
+}
+
+/* Gaya umum untuk form lainnya, misalnya untuk Update Stok */
+.update-stock-form,
+.delete-product-form {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.update-stock-button,
+.delete-product-button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Gaya hover untuk button */
+.update-stock-button:hover,
+.delete-product-button:hover {
+    background-color: #45a049;
+}
+
+/* Gaya untuk inputan form */
+.add-product-input,
+.update-stock-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-inventory {
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-update-produk {
+    padding: 40px;
+    width: auto;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.logout-link {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 5px;
+    background-color: #cafbcc;
 }
