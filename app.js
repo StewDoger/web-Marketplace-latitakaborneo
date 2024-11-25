@@ -5,7 +5,10 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Koneksi ke MongoDB menggunakan URI dari file .env
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/chatbot', { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+})
     .then(() => {
         console.log('Successfully connected to MongoDB');
     })
@@ -14,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     });
 
 // Definisikan model Item
-const Item = mongoose.model('Item', new mongoose.Schema({
+const Item = mongoose.model('products', new mongoose.Schema({
     name: String,
     description: String,
     price: Number,
@@ -34,40 +37,60 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 // Route untuk halaman inventory
-app.get('/inventory', (req, res) => {
-    Item.find()  // Ambil semua data produk dari database
-        .then((items) => {
-            res.render('inventory', { items }); // Kirim data produk ke tampilan 'inventory.ejs'
-        })
-        .catch((err) => {
-            console.error('Error fetching items:', err);
-            res.status(500).send('Error retrieving data');
-        });
+app.get('/inventory', async (req, res) => {
+    try {
+        // Ambil data produk dari MongoDB (atau sumber data lainnya)
+        const products = await Item.find(); // atau query yang sesuai dengan struktur aplikasi Anda
+        res.render('inventory', { products }); // Kirim data products ke view
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+    }
 });
 
 // Route untuk halaman home
 app.get('/', (req, res) => {
-    res.render('index' , { dirname: __dirname }); // Renders views/index.ejs
+    res.render('index'); // Renders views/index.ejs
 });
 
 // Route untuk halaman konsultasi
 app.get('/konsultasi', (req, res) => {
-    res.render('konsultasi', { dirname: __dirname });
+    res.render('konsultasi');
 });
 
-// Route untuk halaman rpduk
+// Route untuk halaman produk
 app.get('/produk', (req, res) => {
-    res.render('produk', { dirname: __dirname });
+    res.render('produk');
 });
 
 // Route untuk halaman hampers
 app.get('/hampers', (req, res) => {
-    res.render('hampers' , { dirname: __dirname }); // Renders views/hampers.ejs
+    res.render('hampers'); // Renders views/hampers.ejs
 });
 
 // Route untuk halaman order
 app.get('/order', (req, res) => {
-    res.render('order' , { dirname: __dirname }); // Renders views/order.ejs
+    res.render('order'); // Renders views/order.ejs
+});
+
+// Route untuk menerima POST request dan menambah produk
+app.post('/submit_produk', async (req, res) => {
+    try {
+        const { 'nama-produk': name, 'deskripsi-produk': description, 'harga-produk': price, 'stok-produk': stock } = req.body;
+
+        const newProduct = new Item({
+            name,
+            description,
+            price,
+            stock
+        });
+
+        await newProduct.save(); // Simpan produk baru
+        res.redirect('/inventory'); // Redirect ke halaman inventory setelah produk disimpan
+    } catch (err) {
+        console.error('Terjadi kesalahan saat menambahkan produk', err);
+        res.status(500).send('Terjadi kesalahan saat menambahkan produk');
+    }
 });
 
 // Mulai server

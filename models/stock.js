@@ -1,13 +1,13 @@
-// models/produk.js
+// models/product.js
 const mongoose = require('mongoose');
 
-const stockSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
     name: String,
     description: String,
     price: Number,
     stock: Number
 });
 
-const Stock = mongoose.model('Stock', stockSchema);
+const Product = mongoose.model('Product', productSchema);
 
-module.exports = Stock;
+module.exports = Product;

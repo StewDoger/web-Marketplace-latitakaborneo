@@ -1,12 +1,12 @@
 // routes/adminRoutes.js
 const express = require('express');
 const router = express.Router();
-const Produk = require('../models/stock');
+const Stock = require('./models/produk');
 
 // Rute untuk menampilkan halaman update stok
 router.get('/update-stok', async (req, res) => {
     try {
-        const products = await Produk.find();  // Ambil data produk dari database
+        const products = await Stock.find();  // Ambil data produk dari database
         res.render('admin/update-stok', { products });
     } catch (err) {
         console.error(err);
@@ -24,7 +24,7 @@ router.post('/update-stok', async (req, res) => {
                 const stockValue = req.body[id];  // Ambil nilai stok yang baru
 
                 // Update stok produk di database
-                await Produk.findByIdAndUpdate(productId, { stock: stockValue });
+                await Stock.findByIdAndUpdate(productId, { stock: stockValue });
             }
         }
 
@@ -33,6 +33,30 @@ router.post('/update-stok', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Terjadi kesalahan saat memperbarui stok produk');
+    }
+});
+
+// Rute untuk menambahkan produk baru
+router.post('/submit_produk', async (req, res) => {
+    try {
+        const { 'nama-produk': name, 'deskripsi-produk': description, 'harga-produk': price, 'stok-produk': stock } = req.body;
+
+        // Membuat produk baru dengan data dari form
+        const newProduct = new Product({  // Ganti Stock dengan Product
+            name,
+            description,
+            price,
+            stock
+        });
+
+        // Menyimpan produk baru ke database
+        await newProduct.save();
+
+        // Setelah produk berhasil ditambahkan, arahkan kembali ke halaman inventaris
+        res.redirect('/inventory');
+    } catch (err) {
+        console.error('Terjadi kesalahan saat menambahkan produk', err);
+        res.status(500).send('Terjadi kesalahan saat menambahkan produk');
     }
 });
 
