@@ -24,7 +24,7 @@ function isAuthenticated(req, res, next) {
 }
 
 // Koneksi ke MongoDB
-mongoose.connect('mongodb://localhost:27017/chatbot', {
+mongoose.connect('mongodb://devi:deviayu123@ac-1abopc9-shard-00-00.etzoacx.mongodb.net:27017,ac-1abopc9-shard-00-01.etzoacx.mongodb.net:27017,ac-1abopc9-shard-00-02.etzoacx.mongodb.net:27017/?ssl=true&replicaSet=atlas-btvwbf-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Data', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
